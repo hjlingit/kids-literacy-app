@@ -18,14 +18,13 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: 赋予 Gradle 执行权限
-        run: chmod +x gradlew || true
-
-      - name: 设置 Gradle 缓存
+      - name: 云端自动安装 Gradle 8.5
         uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.5'
 
-      - name: 编译 Debug APK
-        run: ./gradlew assembleDebug --stacktrace
+      - name: 直接编译 APK
+        run: gradle assembleDebug --stacktrace
 
       - name: 上传 APK 安装包
         uses: actions/upload-artifact@v4
